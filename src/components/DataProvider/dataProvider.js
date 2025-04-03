@@ -1,14 +1,15 @@
 import { Create, DELETE, fetchUtils } from "react-admin";
 import { stringify } from "query-string";
 
-const apiUrl = "http://localhost:3000";
+// const apiUrl = "http://localhost:3000";
+const apiUrl = "https://incredible-backend.vercel.app";
 
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
 
   create: (resource, params) => {
-    
+
     console.log("inside create")
     if (["locations", "categories", "places", "transport","locationtransport"].includes(resource)) {
       const formData = new FormData();
@@ -47,16 +48,16 @@ const dataProvider = {
 
       return fetch(`${apiUrl}/${resource}`, {
         method: "POST",
-        body: formData, 
+        body: formData,
 
       })
       .then((response) => response.json(),
-    
+
 
     )
       .then((data) => ({ data: { ...data, id: data._id } }));
     }
-    
+
     if (resource === "places/nearby_places") {
       return fetch(`${apiUrl}/places/addnearby`, {
         method: "POST",
@@ -130,7 +131,7 @@ const dataProvider = {
   //         data: { ...data, id: data._id },
   //       }));
   //   }
-      
+
   //   if (
   //     resource === "locations" ||
   //     resource === "categories" ||
@@ -356,7 +357,7 @@ const dataProvider = {
       return httpClient(url, {
         method: "DELETE",
 
-        body: JSON.stringify({ ids: params.ids }), 
+        body: JSON.stringify({ ids: params.ids }),
       }).then(({ json }) => ({
         data: json.ids || params.ids,
       }));
