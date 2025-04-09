@@ -4,13 +4,14 @@ import uploadToCloudinary from "../../UploadCloudinary";
 
 
 
-const apiUrl = "http://localhost:3000";
+// const apiUrl = "http://localhost:3000";
+const apiUrl = "https://incredible-backend.vercel.app";
 
 const httpClient = fetchUtils.fetchJson;
 
 const dataProvider = {
 
-  create: async (resource, params) => {
+  create: (resource, params) => {
 
     console.log("inside create")
     if (["locations", "categories", "places", "transport", "locationtransport"].includes(resource)) {
@@ -98,7 +99,7 @@ const dataProvider = {
         body: formData,
 
       })
-        .then((response) => response.json(),
+      .then((response) => response.json(),
 
 
         )
@@ -160,8 +161,78 @@ const dataProvider = {
 
     return Promise.reject("Unknown resource!");
   },
+  // update: (resource, params) => {
+  //   if (resource === "places/nearby_places") {
+  //     const url = `${apiUrl}/places/updatenearby/${params.id}`;
 
-  update: async (resource, params) => {
+  //     if (resource == "locations" && !params.data.parent_id) {
+  //       params.data.parent_id = null;
+  //     }
+
+  //   return fetch(url, {
+  //       method: "PUT",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(params.data),
+  //     })
+  //       .then((response) => response.json())
+
+  //       .then((data) => ({
+  //         data: { ...data, id: data._id },
+  //       }));
+  //   }
+
+  //   if (
+  //     resource === "locations" ||
+  //     resource === "categories" ||
+  //     resource === "places" ||
+  //     resource === "transport"||
+  //     resource === "locationtransport"
+  //   ) {
+  //     const url = `${apiUrl}/${resource}/${params.id}`;
+  //     const formData = new FormData();
+
+  //     Object.keys(params.data).forEach((key) => {
+  //       if (key === "pictures" && Array.isArray(params.data[key])) {
+  //         params.data[key].forEach((file) => {
+  //           if (file.rawFile) {
+  //             formData.append("pictures", file.rawFile);
+  //           }
+  //         });
+  //       } else if (key === "picture" && params.data.picture?.rawFile) {
+  //         formData.append("picture", params.data.picture.rawFile);
+  //       } else if (key === "parent_id" && params.data[key] === null) {
+  //         formData.append("parent_id", null);
+  //       } else if (key === "contact_info" || key === "opening_hours") {
+  //         formData.append(key, JSON.stringify(params.data[key]));
+  //       } else {
+  //         formData.append(key, params.data[key]);
+  //       }
+  //     });
+
+  //     return fetch(url, {
+  //       method: "PUT",
+  //       body: formData,
+  //     })
+  //       .then((response) => {
+  //         if (!response.ok) {
+  //           throw new Error(
+  //             `Failed to update ${resource}: ${response.statusText}`
+  //           );
+  //         }
+  //         return response.json();
+  //       })
+  //       .then((data) => ({
+  //         data: { ...data, id: data._id },
+  //       }))
+  //       .catch((error) => {
+  //         console.error("Update Error:", error);
+  //         throw error;
+  //       });
+  //   }
+
+  //   return Promise.reject("Unknown resource!");
+  // },
+  update: (resource, params) => {
     if (resource === "places/nearby_places") {
       const url = `${apiUrl}/places/updatenearby/${params.id}`;
 
