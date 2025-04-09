@@ -1,6 +1,19 @@
-
-import React from 'react';
-import { Edit, SimpleForm, TextInput, ReferenceInput, SelectInput, ArrayInput, SimpleFormIterator, DateTimeInput, NumberInput, useGetList, FileInput, FileField } from 'react-admin';
+import React from "react";
+import {
+  Edit,
+  SimpleForm,
+  TextInput,
+  ReferenceInput,
+  SelectInput,
+  ArrayInput,
+  SimpleFormIterator,
+  DateTimeInput,
+  NumberInput,
+  useGetList,
+  FileInput,
+  FileField,
+  ImageField,
+} from "react-admin";
 
 export const PlaceEdit = (props) => {
   const { data: locations, isLoading } = useGetList("locations", {
@@ -15,15 +28,17 @@ export const PlaceEdit = (props) => {
     filter: {},
   });
 
-  const filteredLocation = locations?.filter(location => location.parent_id !== null);
+  const filteredLocation = locations?.filter(
+    (location) => location.parent_id !== null
+  );
 
   const dayChoices = [
-    { id: 'Monday', name: 'Monday' },
-    { id: 'Tuesday', name: 'Tuesday' },
-    { id: 'Wednesday', name: 'Wednesday' },
-    { id: 'Thursday', name: 'Thursday' },
-    { id: 'Friday', name: 'Friday' },
-    { id: 'Saturday', name: 'Saturday' },
+    { id: "Monday", name: "Monday" },
+    { id: "Tuesday", name: "Tuesday" },
+    { id: "Wednesday", name: "Wednesday" },
+    { id: "Thursday", name: "Thursday" },
+    { id: "Friday", name: "Friday" },
+    { id: "Saturday", name: "Saturday" },
   ];
 
   if (isLoading || isDataLoading) {
@@ -36,23 +51,31 @@ export const PlaceEdit = (props) => {
         <TextInput source="name" label="Place Name" />
         <TextInput source="description" label="Description" />
 
+
         {/* <ReferenceInput source="location_id" label="Location" reference="locations">
           <SelectInput optionText="name" />
         </ReferenceInput> */}
-                <SelectInput 
-                  source="location_id" 
-                  label="Location" 
-                  choices={filteredLocation.map(location => ({
-                    id: location.id,
-                    name: location.name,
-                  }))}
-                  optionText="name"
-                  optionValue="id"
-                  emptyText="No Location Id"
-                />
-        
+        <ReferenceInput source="location_id" label="Location" reference="locations">
+  <SelectInput optionText="name" />
+</ReferenceInput>
 
-        <ReferenceInput source="category_id" label="Category" reference="categories">
+        {/* <SelectInput
+          source="location_id"
+          label="Location"
+          choices={filteredLocation.map((location) => ({
+            id: location.id,
+            name: location.name,
+          }))}
+          optionText="name"
+          optionValue="id"
+          emptyText="No Location Id"
+        /> */}
+
+        <ReferenceInput
+          source="category_id"
+          label="Category"
+          reference="categories"
+        >
           <SelectInput optionText="name" />
         </ReferenceInput>
 
@@ -65,6 +88,8 @@ export const PlaceEdit = (props) => {
         <FileInput source="pictures" label="Images" accept="image/*" multiple>
           <FileField source="src" title="title" />
         </FileInput>
+
+
 
         <TextInput source="video" label="Video URL" />
 
@@ -86,7 +111,6 @@ export const PlaceEdit = (props) => {
             <TextInput source="close" label="Closing Time" />
           </SimpleFormIterator>
         </ArrayInput>
-
       </SimpleForm>
     </Edit>
   );

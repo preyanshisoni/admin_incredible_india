@@ -23,18 +23,18 @@ const { data: locations, isLoading } = useGetList("locations", {
       <SimpleForm>
             <TextInput source="name" label="Name of State/City" />
              {/* <TextInput source="description" label="Description" /> */}
-             
-             <CkEditor source="description" label="Description" /> 
 
-    
+             <CkEditor source="description" label="Description" />
+
+
             <BooleanInput label="Favorite" source="favorite" />
-    
+
             <BooleanInput label="Most Visited" source="most_visited" />
-    
+
             <FileInput source="picture" label="Image" accept="image/*">
               <FileField source="src" title="title" />
             </FileInput>
-    
+
             {/* <SelectInput
               label="Parent Location"
               source="parent_id"
@@ -47,7 +47,7 @@ const { data: locations, isLoading } = useGetList("locations", {
               emptyText="No parent"
               defaultValue={props.record?.parent_id} // Ensure default selection
 
-              
+
             /> */}
 
 <SelectInput

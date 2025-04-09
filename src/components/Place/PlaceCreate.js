@@ -1,18 +1,19 @@
   import React, { useState } from 'react';
   import { Editor, EditorState } from "draft-js";
   import "draft-js/dist/Draft.css";
-  import { 
-    Create, 
-    SimpleForm, 
-    TextInput, 
-    SelectInput, 
-    ArrayInput, 
-    SimpleFormIterator, 
-    NumberInput, 
-    FileInput, 
-    FileField, 
-    BooleanInput, 
-    useGetList 
+  import {
+    Create,
+    SimpleForm,
+    TextInput,
+    SelectInput,
+    ArrayInput,
+    SimpleFormIterator,
+    NumberInput,
+    FileInput,
+    FileField,
+    BooleanInput,
+    useGetList,
+    ImageField
   } from 'react-admin';
 
   export const PlaceCreate = () => {
@@ -32,7 +33,7 @@
       { id: 'Monday', name: 'Monday' },
       { id: 'Tuesday', name: 'Tuesday' },
       { id: 'Wednesday', name: 'Wednesday' },
-      { id: 'Thursday', name: 'Thursday' },  
+      { id: 'Thursday', name: 'Thursday' },
       { id: 'Friday', name: 'Friday' },
       { id: 'Saturday', name: 'Saturday' },
     ];
@@ -81,14 +82,17 @@
 
           <ArrayInput source="tags" label="Tags">
             <SimpleFormIterator>
-              <TextInput/> 
+              <TextInput/>
             </SimpleFormIterator>
           </ArrayInput>
 
-          
-          <FileInput source="pictures" label="Images" accept="image/*" multiple>
+
+          {/* <FileInput source="pictures" label="Images" accept="image/*" multiple>
   <FileField source="src" title="title" />
-</FileInput >
+</FileInput > */}
+<FileInput source="pictures" label="Images" accept="image/*" multiple>
+  <ImageField source="src" title="title" />
+</FileInput>
 
           <TextInput source="video" label="Video URL" />
           <NumberInput source="latitude" label="Latitude" />
@@ -108,5 +112,5 @@
 
         </SimpleForm>
       </Create>
-    );  
+    );
   };
